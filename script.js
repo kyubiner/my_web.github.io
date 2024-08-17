@@ -1,13 +1,13 @@
 function loadTasks() {
     var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(function(task) {
+    tasks.forEach(function (task) {
         addTaskToList(task.text, task.day, task.subject, task.completed);
     });
 }
 
 function saveTasks() {
     var tasks = [];
-    document.querySelectorAll('#taskList li').forEach(function(li) {
+    document.querySelectorAll('#taskList li').forEach(function (li) {
         var taskText = li.querySelector('.taskText').textContent;
         var taskDay = li.querySelector('.taskDay').textContent;
         var taskSubject = li.querySelector('.taskSubject').textContent;
@@ -26,7 +26,7 @@ function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
     checkbox.type = 'checkbox';
     checkbox.checked = completed;
 
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
             li.classList.add('completed');
         } else {
@@ -51,22 +51,22 @@ function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
     deleteButton.textContent = 'Hapus';
     deleteButton.disabled = !checkbox.checked; // Tombol dinonaktifkan jika belum diceklis
 
-    deleteButton.addEventListener('click', function() {
+    deleteButton.addEventListener('click', function () {
         if (checkbox.checked) {
             taskList.removeChild(li);
             saveTasks();
         }
     });
 
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         deleteButton.disabled = !checkbox.checked;
     });
 
     label.appendChild(checkbox);
     label.appendChild(spanText);
-    label.appendChild(document.createTextNode(' | '));
+    label.appendChild(document.createTextNode(' [||] '));
     label.appendChild(spanDay);
-    label.appendChild(document.createTextNode(' | '));
+    label.appendChild(document.createTextNode(' [||] '));
     label.appendChild(spanSubject);
 
     li.appendChild(label);
@@ -77,7 +77,7 @@ function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
     taskList.appendChild(li);
 }
 
-document.getElementById('addTaskButton').addEventListener('click', function() {
+document.getElementById('addTaskButton').addEventListener('click', function () {
     var taskInput = document.getElementById('taskInput');
     var dayInput = document.getElementById('dayInput');
     var subjectInput = document.getElementById('subjectInput');
