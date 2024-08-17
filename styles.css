@@ -84,3 +84,13 @@ li button {
 li button:hover {
   background-color: #c82333;
 }
+
+/* Tambahkan styling untuk form input baru */
+input[type="text"],
+select {
+  padding: 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: auto;
+}

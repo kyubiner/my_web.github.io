@@ -1,24 +1,23 @@
-// Fungsi untuk memuat tugas dari localStorage saat halaman dimuat
 function loadTasks() {
     var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(function(task) {
-        addTaskToList(task.text, task.completed);
+        addTaskToList(task.text, task.day, task.subject, task.completed);
     });
 }
 
-// Fungsi untuk menyimpan tugas ke localStorage
 function saveTasks() {
     var tasks = [];
     document.querySelectorAll('#taskList li').forEach(function(li) {
-        var taskText = li.querySelector('span').textContent;
+        var taskText = li.querySelector('.taskText').textContent;
+        var taskDay = li.querySelector('.taskDay').textContent;
+        var taskSubject = li.querySelector('.taskSubject').textContent;
         var taskCompleted = li.classList.contains('completed');
-        tasks.push({ text: taskText, completed: taskCompleted });
+        tasks.push({ text: taskText, day: taskDay, subject: taskSubject, completed: taskCompleted });
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Fungsi untuk menambahkan tugas ke daftar di halaman
-function addTaskToList(taskText, completed = false) {
+function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
     var taskList = document.getElementById('taskList');
     var li = document.createElement('li');
 
@@ -36,18 +35,40 @@ function addTaskToList(taskText, completed = false) {
         saveTasks();
     });
 
-    var span = document.createElement('span');
-    span.textContent = taskText;
+    var spanText = document.createElement('span');
+    spanText.textContent = taskText;
+    spanText.className = 'taskText';
+
+    var spanDay = document.createElement('span');
+    spanDay.textContent = taskDay;
+    spanDay.className = 'taskDay';
+
+    var spanSubject = document.createElement('span');
+    spanSubject.textContent = taskSubject;
+    spanSubject.className = 'taskSubject';
 
     var deleteButton = document.createElement('button');
     deleteButton.textContent = 'Hapus';
+    deleteButton.disabled = !checkbox.checked; // Tombol dinonaktifkan jika belum diceklis
+
     deleteButton.addEventListener('click', function() {
-        taskList.removeChild(li);
-        saveTasks();
+        if (checkbox.checked) {
+            taskList.removeChild(li);
+            saveTasks();
+        }
+    });
+
+    checkbox.addEventListener('change', function() {
+        deleteButton.disabled = !checkbox.checked;
     });
 
     label.appendChild(checkbox);
-    label.appendChild(span);
+    label.appendChild(spanText);
+    label.appendChild(document.createTextNode(' | '));
+    label.appendChild(spanDay);
+    label.appendChild(document.createTextNode(' | '));
+    label.appendChild(spanSubject);
+
     li.appendChild(label);
     li.appendChild(deleteButton);
     if (completed) {
@@ -56,17 +77,22 @@ function addTaskToList(taskText, completed = false) {
     taskList.appendChild(li);
 }
 
-// Event listener untuk menambahkan tugas baru
 document.getElementById('addTaskButton').addEventListener('click', function() {
     var taskInput = document.getElementById('taskInput');
-    var taskText = taskInput.value.trim();
+    var dayInput = document.getElementById('dayInput');
+    var subjectInput = document.getElementById('subjectInput');
 
-    if (taskText !== "") {
-        addTaskToList(taskText);
+    var taskText = taskInput.value.trim();
+    var taskDay = dayInput.value;
+    var taskSubject = subjectInput.value.trim();
+
+    if (taskText !== "" && taskSubject !== "") {
+        addTaskToList(taskText, taskDay, taskSubject);
         saveTasks();
         taskInput.value = '';
+        subjectInput.value = '';
     }
 });
 
-// Muat tugas dari localStorage saat halaman dimuat
 loadTasks();
+
