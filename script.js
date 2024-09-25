@@ -64,9 +64,9 @@ function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
 
     label.appendChild(checkbox);
     label.appendChild(spanText);
-    label.appendChild(document.createTextNode(' [||] '));
+    label.appendChild(document.createTextNode(' _ '));
     label.appendChild(spanDay);
-    label.appendChild(document.createTextNode(' [||] '));
+    label.appendChild(document.createTextNode(' _ '));
     label.appendChild(spanSubject);
 
     li.appendChild(label);
