@@ -1,15 +1,18 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Memusatkan secara horizontal */
+  align-items: center; /* Memusatkan secara vertikal */
+  height: 100vh; /* Mengatur tinggi halaman menjadi 100% viewport */
 }
 
 .container {
-  background: #fff;
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -20,20 +23,21 @@ h1 {
   color: #333;
 }
 
-input[type="text"] {
-  width: 80%;
+input[type="text"],
+select,
+button {
+  width: 100%;
   padding: 10px;
-  margin-right: 5px;
+  margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 3px;
+  box-sizing: border-box;
 }
 
 button {
-  padding: 10px;
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -53,8 +57,9 @@ li {
   border: 1px solid #ddd;
   border-radius: 3px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 li label {
@@ -79,18 +84,36 @@ li button {
   border-radius: 3px;
   cursor: pointer;
   padding: 5px 10px;
+  margin-left: 10px;
 }
 
 li button:hover {
   background-color: #c82333;
 }
 
-/* Tambahkan styling untuk form input baru */
-input[type="text"],
-select {
-  padding: 10px;
-  margin-right: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  width: auto;
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  input[type="text"],
+  select,
+  button {
+    font-size: 14px;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  li label {
+    width: 100%;
+  }
+
+  li button {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
