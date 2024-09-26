@@ -7,12 +7,12 @@
   "theme_color": "#007bff",
   "icons": [
     {
-      "src": "/my_web.github.io/image/icon.png",
+      "src": "/image/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/my_web.github.io/image/icon.png",
+      "src": "/image/icon2.png",
       "type": "image/png",
       "sizes": "512x512"
     }
