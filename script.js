@@ -109,7 +109,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
   installButton.addEventListener('click', () => {
     // Sembunyikan tombol
-    installButton.style.display = 'none';+
+    installButton.style.display = 'none';
     // Tampilkan prompt instalasi
     deferredPrompt.prompt();
     // Tunggu pengguna untuk memilih opsi
@@ -128,3 +128,4 @@ window.addEventListener('appinstalled', () => {
   // Event ketika PWA terinstal
   console.log('PWA telah terinstal!');
 });
+
