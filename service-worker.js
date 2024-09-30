@@ -15,8 +15,8 @@ const urlsToCache = [
   '/my_web.github.io/styles.css',
   '/my_web.github.io/script.js',
   '/my_web.github.io/manifest.json',
-  '/my_web.github.io/manifest.json/image/icon.png',
-  '/my_web.github.io/manifest.json/image/icon2.png'
+  '/my_web.github.io/image/icon.png',
+  '/my_web.github.io/image/icon2.png'
 ];
 
 self.addEventListener('install', function(event) {
