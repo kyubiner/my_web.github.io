@@ -64,9 +64,9 @@ function addTaskToList(taskText, taskDay, taskSubject, completed = false) {
 
     label.appendChild(checkbox);
     label.appendChild(spanText);
-    label.appendChild(document.createTextNode(' _ '));
+    label.appendChild(document.createTextNode(' - '));
     label.appendChild(spanDay);
-    label.appendChild(document.createTextNode(' _ '));
+    label.appendChild(document.createTextNode(' - '));
     label.appendChild(spanSubject);
 
     li.appendChild(label);
@@ -109,7 +109,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
   installButton.addEventListener('click', () => {
     // Sembunyikan tombol
-    installButton.style.display = 'none';
+    installButton.style.display = 'none';+
     // Tampilkan prompt instalasi
     deferredPrompt.prompt();
     // Tunggu pengguna untuk memilih opsi
