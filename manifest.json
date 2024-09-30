@@ -8,11 +8,11 @@
   "icons": [
     {
       "src": "/my_web.github.io/image/icon.png",
-      "type": "/my_web.github.io/image/png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/image/icon2.png",
+      "src": "/my_web.github.io/image/icon2.png",
       "type": "image/png",
       "sizes": "512x512"
     }
