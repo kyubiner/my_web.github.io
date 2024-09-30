@@ -1,7 +1,7 @@
 {
   "name": "Daftar Tugas Harian",
   "short_name": "Tugas",
-  "start_url": "/index.html",
+  "start_url": "/my_web.github.io/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
