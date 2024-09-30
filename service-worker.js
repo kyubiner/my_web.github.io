@@ -10,13 +10,13 @@ if ('serviceWorker' in navigator) {
 
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/manifest.json',
-  '/image/icon.png',
-  '/image/icon2.png'
+  '/my_web.github.io',
+  '/my_web.github.io/index.html',
+  '/my_web.github.io/styles.css',
+  '/my_web.github.io/script.js',
+  '/my_web.github.io/manifest.json',
+  '/my_web.github.io/manifest.json/image/icon.png',
+  '/my_web.github.io/manifest.json/image/icon2.png'
 ];
 
 self.addEventListener('install', function(event) {
