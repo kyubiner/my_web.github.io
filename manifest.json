@@ -7,8 +7,8 @@
   "theme_color": "#007bff",
   "icons": [
     {
-      "src": "/image/icon.png",
-      "type": "image/png",
+      "src": "/my_web.github.io/image/icon.png",
+      "type": "/my_web.github.io/image/png",
       "sizes": "192x192"
     },
     {
