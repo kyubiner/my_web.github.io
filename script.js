@@ -129,3 +129,9 @@ window.addEventListener('appinstalled', () => {
   console.log('PWA telah terinstal!');
 });
 
+window.addEventListener('appinstalled', (event) => {
+  console.log('PWA berhasil diinstal.', event);
+  // Sembunyikan kontainer setelah aplikasi diinstal
+  installContainer.style.display = 'none';
+});
+
