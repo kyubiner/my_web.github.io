@@ -59,7 +59,8 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let = deferredPrompt;
+      let deferredPrompt; // Deklarasikan variabel deferredPrompt di luar event listener
+
       document.addEventListener("DOMContentLoaded", (event) => {
         const installButton = document.getElementById("installButton");
         const installBanner = document.getElementById("installBanner");
@@ -72,23 +73,23 @@
 
           window.addEventListener("beforeinstallprompt", (e) => {
             e.preventDefault();
-            deferredPrompt = e;
+            deferredPrompt = e; // Simpan event di variabel deferredPrompt
             installBanner.style.display = "block"; // Tampilkan banner untuk instalasi
           });
 
           installButton.addEventListener("click", async () => {
             if (deferredPrompt) {
-              deferredPrompt.prompt();
+              deferredPrompt.prompt(); // Panggil prompt instalasi
               const { outcome } = await deferredPrompt.userChoice;
               if (outcome === "accepted") {
-                installBanner.style.display = "none"; // Sembunyikan setelah instalasi berhasil
+                installBanner.style.display = "none"; // Sembunyikan banner setelah instalasi
               }
-              deferredPrompt = null;
+              deferredPrompt = null; // Reset deferredPrompt setelah proses
             }
           });
 
           window.addEventListener("appinstalled", () => {
-            installBanner.style.display = "none"; // Sembunyikan ketika aplikasi terinstal
+            installBanner.style.display = "none"; // Sembunyikan banner ketika aplikasi terinstal
           });
         } else {
           console.error("Elemen installButton atau installBanner tidak ditemukan!");
