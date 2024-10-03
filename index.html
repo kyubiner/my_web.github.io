@@ -59,42 +59,28 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let deferredPrompts;
-      const installContainer = document.getElementById("installContainer");
+      let deferredPrompt;
       const installButton = document.getElementById("installButton");
 
       window.addEventListener("beforeinstallprompt", (e) => {
-        console.log("Event beforeinstallprompt terdeteksi");
-        // Cegah prompt otomatis muncul
         e.preventDefault();
-        deferredPrompts = e;
-        // Tampilkan kontainer instalasi dengan tombol dan teks
-        installContainer.style.display = "block";
+        deferredPrompt = e;
+        installButton.style.display = "block"; // Tampilkan tombol saat event tersedia
       });
 
-      installButton.addEventListener("click", () => {
-        console.log("Tombol instalasi di-klik");
-        // Sembunyikan tombol dan teks
-        installContainer.style.display = "none";
-        // Tampilkan prompt instalasi
-        deferredPrompts.prompt();
-        // Tunggu pengguna memilih
-        deferredPrompts.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === "accepted") {
-            console.log("Pengguna menerima instalasi PWA.");
-          } else {
-            console.log("Pengguna menolak instalasi PWA.");
+      installButton.addEventListener("click", async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === "accepted") {
+            installButton.style.display = "none"; // Sembunyikan tombol setelah instalasi
           }
-          deferredPrompts = null;
-        });
+          deferredPrompt = null;
+        }
       });
 
-      window.addEventListener("appinstalled", (event) => {
-        console.log("PWA berhasil diinstal.", event);
-        // Sembunyikan kontainer setelah aplikasi diinstal
-        installContainer.style.display = "none";
-        // Simpan status instalasi di localStorage
-        localStorage.setItem("pwaInstalled", "true");
+      window.addEventListener("appinstalled", () => {
+        installButton.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
       });
     </script>
     <script src="script.js"></script>
