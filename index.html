@@ -21,7 +21,7 @@
       }
 
       #installButton {
-        background-color: #28a745;
+        background-color: #218838;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -59,28 +59,28 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let deferredPrompt;
-      const installButton = document.getElementById("installButton");
+      let deferredPrompts;
+      const installBanner = document.getElementById("install-banner");
 
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
-        deferredPrompt = e;
-        installButton.style.display = "block"; // Tampilkan tombol saat event tersedia
+        deferredPrompts = e;
+        installBanner.style.display = "block"; // Tampilkan tombol saat event tersedia
       });
 
-      installButton.addEventListener("click", async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
+      installBanner.addEventListener("click", async () => {
+        if (deferredPrompts) {
+          deferredPrompts.prompt();
+          const { outcome } = await deferredPrompts.userChoice;
           if (outcome === "accepted") {
-            installButton.style.display = "none"; // Sembunyikan tombol setelah instalasi
+            installBanner.style.display = "none"; // Sembunyikan tombol setelah instalasi
           }
-          deferredPrompt = null;
+          deferredPrompts = null;
         }
       });
 
       window.addEventListener("appinstalled", () => {
-        installButton.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
+        installBanner.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
       });
     </script>
     <script src="script.js"></script>
