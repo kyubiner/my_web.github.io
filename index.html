@@ -61,16 +61,19 @@
     <script>
       let = deferredPrompt;
       document.addEventListener("DOMContentLoaded", (event) => {
-        // Pastikan semua elemen DOM sudah siap
         const installButton = document.getElementById("installButton");
         const installBanner = document.getElementById("installBanner");
 
-        // Pastikan elemen ditemukan
         if (installButton && installBanner) {
+          // Cek apakah aplikasi sudah terinstal ketika halaman dimuat
+          if (window.matchMedia("(display-mode: standalone)").matches) {
+            installBanner.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
+          }
+
           window.addEventListener("beforeinstallprompt", (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBanner.style.display = "block"; // Tampilkan banner
+            installBanner.style.display = "block"; // Tampilkan banner untuk instalasi
           });
 
           installButton.addEventListener("click", async () => {
@@ -78,14 +81,14 @@
               deferredPrompt.prompt();
               const { outcome } = await deferredPrompt.userChoice;
               if (outcome === "accepted") {
-                installBanner.style.display = "none"; // Sembunyikan banner setelah instalasi
+                installBanner.style.display = "none"; // Sembunyikan setelah instalasi berhasil
               }
               deferredPrompt = null;
             }
           });
 
           window.addEventListener("appinstalled", () => {
-            installBanner.style.display = "none"; // Sembunyikan banner jika aplikasi sudah terinstal
+            installBanner.style.display = "none"; // Sembunyikan ketika aplikasi terinstal
           });
         } else {
           console.error("Elemen installButton atau installBanner tidak ditemukan!");
