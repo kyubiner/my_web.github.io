@@ -61,11 +61,12 @@
     <script>
       let deferredPrompt;
       const installButton = document.getElementById("installButton");
+      const installBanner = document.getElementById("installBanner");
 
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        installButton.style.display = "block"; // Tampilkan tombol saat event tersedia
+        installBanner.style.display = "block"; // Tampilkan banner
       });
 
       installButton.addEventListener("click", async () => {
@@ -73,14 +74,14 @@
           deferredPrompt.prompt();
           const { outcome } = await deferredPrompt.userChoice;
           if (outcome === "accepted") {
-            installButton.style.display = "none"; // Sembunyikan tombol setelah instalasi
+            installBanner.style.display = "none"; // Sembunyikan banner setelah instalasi
           }
           deferredPrompt = null;
         }
       });
 
       window.addEventListener("appinstalled", () => {
-        installButton.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
+        installBanner.style.display = "none"; // Sembunyikan banner jika aplikasi sudah terinstal
       });
     </script>
     <script src="script.js"></script>
