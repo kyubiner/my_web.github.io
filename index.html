@@ -59,29 +59,36 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let deferredPrompt;
-      const installButton = document.getElementById("installButton");
-      const installBanner = document.getElementById("installBanner");
+      document.addEventListener("DOMContentLoaded", (event) => {
+        // Pastikan semua elemen DOM sudah siap
+        const installButton = document.getElementById("installButton");
+        const installBanner = document.getElementById("installBanner");
 
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBanner.style.display = "block"; // Tampilkan banner
-      });
+        // Pastikan elemen ditemukan
+        if (installButton && installBanner) {
+          window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBanner.style.display = "block"; // Tampilkan banner
+          });
 
-      installButton.addEventListener("click", async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === "accepted") {
-            installBanner.style.display = "none"; // Sembunyikan banner setelah instalasi
-          }
-          deferredPrompt = null;
+          installButton.addEventListener("click", async () => {
+            if (deferredPrompt) {
+              deferredPrompt.prompt();
+              const { outcome } = await deferredPrompt.userChoice;
+              if (outcome === "accepted") {
+                installBanner.style.display = "none"; // Sembunyikan banner setelah instalasi
+              }
+              deferredPrompt = null;
+            }
+          });
+
+          window.addEventListener("appinstalled", () => {
+            installBanner.style.display = "none"; // Sembunyikan banner jika aplikasi sudah terinstal
+          });
+        } else {
+          console.error("Elemen installButton atau installBanner tidak ditemukan!");
         }
-      });
-
-      window.addEventListener("appinstalled", () => {
-        installBanner.style.display = "none"; // Sembunyikan banner jika aplikasi sudah terinstal
       });
     </script>
     <script src="script.js"></script>
