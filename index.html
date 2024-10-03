@@ -8,37 +8,37 @@
     <link rel="manifest" href="/my_web.github.io/manifest.json" />
     <style>
       /* Tambahkan style untuk border dan tata letak di bagian atas */
-      .install-container {
-        display: none; /* Awalnya tidak terlihat */
-        border: 2px solid #007bff;
+      .install-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #f0f0f0;
+        border: 1px solid #00ff1a;
         padding: 10px;
-        margin-bottom: 20px;
         text-align: center;
-        background-color: #f8f9fa;
+        z-index: 1000; /* Pastikan selalu di atas elemen lain */
       }
 
-      .install-button {
-        padding: 10px 20px;
-        background-color: #007bff;
+      #installButton {
+        background-color: #00ff1a;
         color: white;
         border: none;
+        padding: 10px 20px;
         cursor: pointer;
-        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
       }
 
-      .install-button:hover {
-        background-color: #0056b3;
-      }
-
-      .install-text {
-        margin-right: 15px;
+      #installButton:hover {
+        background-color: #006e14;
       }
     </style>
   </head>
   <body>
-    <div class="install-container" id="installContainer">
-      <span class="install-text">Instal aplikasi ini untuk pengalaman yang lebih baik.</span>
-      <button class="install-button" id="installButton">Instal Aplikasi</button>
+    <div class="install-banner">
+      <p>Instal aplikasi ini untuk pengalaman yang lebih baik.</p>
+      <button id="installButton">Instal Aplikasi</button>
     </div>
     <div class="container">
       <h1>Daftar Tugas Harian</h1>
@@ -59,7 +59,7 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let deferredPrompt;
+      let deferredPrompts;
       const installContainer = document.getElementById("installContainer");
       const installButton = document.getElementById("installButton");
 
@@ -67,7 +67,7 @@
         console.log("Event beforeinstallprompt terdeteksi");
         // Cegah prompt otomatis muncul
         e.preventDefault();
-        deferredPrompt = e;
+        deferredPrompts = e;
         // Tampilkan kontainer instalasi dengan tombol dan teks
         installContainer.style.display = "block";
       });
@@ -77,15 +77,15 @@
         // Sembunyikan tombol dan teks
         installContainer.style.display = "none";
         // Tampilkan prompt instalasi
-        deferredPrompt.prompt();
+        deferredPrompts.prompt();
         // Tunggu pengguna memilih
-        deferredPrompt.userChoice.then((choiceResult) => {
+        deferredPrompts.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === "accepted") {
             console.log("Pengguna menerima instalasi PWA.");
           } else {
             console.log("Pengguna menolak instalasi PWA.");
           }
-          deferredPrompt = null;
+          deferredPrompts = null;
         });
       });
 
