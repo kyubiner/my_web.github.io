@@ -59,28 +59,28 @@
       <ul id="taskList"></ul>
     </div>
     <script>
-      let deferredPrompts;
-      const installBanner = document.getElementById("install-banner");
+      let deferredPrompt;
+      const installButton = document.getElementById("installButton");
 
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
-        deferredPrompts = e;
-        installBanner.style.display = "block"; // Tampilkan tombol saat event tersedia
+        deferredPrompt = e;
+        installButton.style.display = "block"; // Tampilkan tombol saat event tersedia
       });
 
-      installBanner.addEventListener("click", async () => {
-        if (deferredPrompts) {
-          deferredPrompts.prompt();
-          const { outcome } = await deferredPrompts.userChoice;
+      installButton.addEventListener("click", async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
           if (outcome === "accepted") {
-            installBanner.style.display = "none"; // Sembunyikan tombol setelah instalasi
+            installButton.style.display = "none"; // Sembunyikan tombol setelah instalasi
           }
-          deferredPrompts = null;
+          deferredPrompt = null;
         }
       });
 
       window.addEventListener("appinstalled", () => {
-        installBanner.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
+        installButton.style.display = "none"; // Sembunyikan jika aplikasi sudah terinstal
       });
     </script>
     <script src="script.js"></script>
