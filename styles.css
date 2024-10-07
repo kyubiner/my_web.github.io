@@ -117,3 +117,15 @@ li button:hover {
     margin-top: 10px;
   }
 }
+
+.task-list {
+    max-height: 300px; /* Atur tinggi maksimum */
+    overflow-y: auto; /* Aktifkan scroll vertikal */
+}
+
+.task-item {
+    margin-bottom: 10px; /* Memberi jarak antar tugas */
+    padding: 10px; /* Memberi ruang di dalam kontainer tugas */
+    border: 1px solid #ddd; /* Tambahkan garis pembatas */
+    border-radius: 5px;
+}
